@@ -1,6 +1,8 @@
 package com.vanniktech.rxriddles
 
 import io.reactivex.Single
+import io.reactivex.functions.BiFunction
+import io.reactivex.schedulers.Schedulers
 
 object Riddle102 {
   /**
@@ -9,6 +11,6 @@ object Riddle102 {
    * Use case: Execute two network requests in parallel and wait for each other and process the combined data.
    */
   fun solve(first: Single<Int>, second: Single<Int>): Single<Pair<Int, Int>> {
-    TODO()
+    return Single.zip(first.subscribeOn(Schedulers.io()), second.subscribeOn(Schedulers.io()), BiFunction { t1: Int, t2: Int -> Pair(t1, t2) })
   }
 }
